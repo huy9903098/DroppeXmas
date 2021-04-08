@@ -1,0 +1,31 @@
+.navbar {
+  background-color: red;
+  height: 100px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.LogoContainer {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+.logo {
+  height: 40px;
+}
+
+.userIcon {
+  height: 40px;
+}
