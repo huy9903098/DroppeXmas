@@ -19,20 +19,6 @@ interface Product {
 }
 
 export const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const [loading, setLoading] = useState(true);
-  const [cartItem, setCartItem] = useState({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('https://fakestoreapi.com/carts?limit=5');
-
-      setCartItem(result.data);
-      setLoading(false);
-      console.log('result.dat: ', result.data);
-    };
-
-    fetchData();
-  }, []);
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartInfo}>Name: John</div>
