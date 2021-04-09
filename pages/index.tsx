@@ -1,22 +1,25 @@
 import Head from 'next/head';
+import { Cart } from '../components/Cart/Cart';
+
+import { Layout } from '../components/Layout';
 import { NavBar } from '../components/NavBar';
+import { TitleBar } from '../components/TitleBar';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/vercel.svg" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i,700"
-        ></link>
       </Head>
 
-      <div>
-        <NavBar />
-      </div>
-    </div>
+      <Layout>
+        <div className={styles.container}>
+          <TitleBar></TitleBar>
+          <Cart></Cart>
+        </div>
+      </Layout>
+    </>
   );
 }

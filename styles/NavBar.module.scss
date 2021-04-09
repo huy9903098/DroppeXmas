@@ -1,31 +1,30 @@
-.navbar {
-  background-color: red;
-  height: 100px;
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-}
-
-.LogoContainer {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 #header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 10px;
-}
+  border-bottom: 1px solid #d0d3d4;
 
-.logo {
-  height: 40px;
-}
+  .user {
+    display: flex;
+    align-items: center;
+    &__icon {
+      border: 2px solid #909497;
+      border-radius: 50%;
+      margin-right: 10px;
+      height: 40px;
+    }
+  }
 
-.userIcon {
-  height: 40px;
+  .logo {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &__icon {
+      height: 36px;
+    }
+  }
 }
