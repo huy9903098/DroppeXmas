@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import { Cart } from '../components/Cart/Cart';
+import { WishLists } from '@components/WishLists/WishLists';
 
-import { Layout } from '../components/Layout';
-import { NavBar } from '../components/NavBar';
-import { TitleBar } from '../components/TitleBar';
-import styles from '../styles/Home.module.scss';
+import { Layout } from '@components/Layout';
+import { TitleBar } from '@components/TitleBar';
+import styles from '@styles/Home.module.scss';
 
 export default function Home() {
   return (
@@ -15,10 +14,8 @@ export default function Home() {
       </Head>
 
       <Layout>
-        <div className={styles.container}>
-          <TitleBar></TitleBar>
-          <Cart></Cart>
-        </div>
+        <TitleBar></TitleBar>
+        <WishLists></WishLists>
       </Layout>
     </>
   );

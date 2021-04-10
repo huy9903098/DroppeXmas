@@ -2,7 +2,7 @@ import '../styles/globals.scss';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
-import store from '../store/store';
+import store from '@store/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
