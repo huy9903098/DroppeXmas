@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@styles/CheckoutCard.module.scss';
+import styles from './CheckoutCard.module.scss';
 
 interface CheckoutCardProps {}
 

@@ -8,8 +8,8 @@ interface WishListsProps {}
 
 export const WishLists: React.FC<WishListsProps> = ({}) => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state: RootStateOrAny) => state.user);
-  const { loading } = useSelector((state: RootStateOrAny) => state.user);
+  const { users, loading } = useSelector((state: RootStateOrAny) => state.user);
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { WishLists } from '@components/WishLists/WishLists';
 
-import { Layout } from '@components/Layout';
-import { TitleBar } from '@components/TitleBar';
+import { Layout } from '@components/Layout/Layout';
+import { TitleBar } from '@components/TitleBar/TitleBar';
 import styles from '@styles/Home.module.scss';
 
 export default function Home() {

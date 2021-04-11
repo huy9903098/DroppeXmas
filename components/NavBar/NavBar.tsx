@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@styles/NavBar.module.scss';
+import styles from './NavBar.module.scss';
 import Link from 'next/link';
 
 interface NavBarProps {}

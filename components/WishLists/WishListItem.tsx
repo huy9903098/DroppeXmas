@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import styles from '@styles/WishListItem.module.scss';
+import styles from './WishListItem.module.scss';
 import Link from 'next/link';
-import { User } from '@utils/types/index';
+import { UserInterface } from '@utils/types/index';
 
 interface WishListItemProps {
-  user: User;
+  user: UserInterface;
 }
 
 export const WishListItem: React.FC<WishListItemProps> = ({ user }) => {

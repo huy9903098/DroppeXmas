@@ -29,7 +29,6 @@ export const fetchUser = (userId) => async (dispatch) => {
           type: types.GET_USER,
           payload: res.data,
         });
-        console.log('res users:', res.data);
       })
       .catch((err) =>
         dispatch({
