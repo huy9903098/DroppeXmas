@@ -1,16 +1,17 @@
 export interface UserInterface {
   address: any;
-  email: String;
+  email: string;
   id: number;
   name: FullName;
-  password: String;
-  phone: String;
-  username: String;
+  password: string;
+  phone: string;
+  username: string;
 }
+[];
 
 export interface FullName {
-  firstname: String;
-  lastname: String;
+  firstname: string;
+  lastname: string;
 }
 
 export interface CartInterface {
@@ -22,5 +23,15 @@ export interface CartInterface {
 
 export interface PreProduct {
   productId: number;
+  quantity: number;
+}
+
+export interface ProductInterface {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
   quantity: number;
 }

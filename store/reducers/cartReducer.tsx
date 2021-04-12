@@ -1,7 +1,7 @@
 import * as types from '@store/styles';
 
 const initialState = {
-  carts: [],
+  carts: {},
   cart: {},
   loading: false,
   error: null,
@@ -18,6 +18,13 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
+        loading: false,
+        error: null,
+      };
+    case types.GET_CARTS:
+      return {
+        ...state,
+        carts: action.payload,
         loading: false,
         error: null,
       };

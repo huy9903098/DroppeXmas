@@ -1,9 +1,10 @@
 import * as types from '@store/styles';
+import { UserInterface } from '@utils/types';
 
 const initialState = {
-  users: [],
-  user: {},
-  loading: false,
+  users: [] as UserInterface[],
+  user: {} as UserInterface,
+  loading: false as boolean,
   error: null,
 };
 

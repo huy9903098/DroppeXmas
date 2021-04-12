@@ -2,7 +2,7 @@ import React from 'react';
 import { WishListItem } from './WishListItem';
 import { useEffect } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '@store/actions/userAction';
+import { fetchCarts } from '@store/actions/cartAction';
 
 interface WishListsProps {}
 
@@ -11,14 +11,14 @@ export const WishLists: React.FC<WishListsProps> = ({}) => {
   const { users, loading } = useSelector((state: RootStateOrAny) => state.user);
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchCarts());
   }, []);
 
   return (
     <>
       {users && !loading ? (
-        users.map(function (data) {
-          return <WishListItem user={data} key={data.id} />;
+        users.map(function (user) {
+          return <WishListItem user={user} key={user.id} />;
         })
       ) : (
         <div>Loading ....</div>

@@ -1,4 +1,15 @@
+@import '@styles/Themes/_position.scss';
+@import '@styles/Themes/_variables.scss';
+
 .cartContainer {
-  background-color: #d0d3d4;
+  background-color: $color-white;
   cursor: pointer;
+  text-transform: uppercase;
+  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
 }

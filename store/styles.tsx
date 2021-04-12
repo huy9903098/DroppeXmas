@@ -5,3 +5,4 @@ export const CART_LOADING = 'CART_LOADING';
 export const USER_LOADING = 'USER_LOADING';
 export const GET_USERS = 'GET_USERS';
 export const GET_USER = 'GET_USER';
+export const GET_CARTS = 'GET_CARTS';
