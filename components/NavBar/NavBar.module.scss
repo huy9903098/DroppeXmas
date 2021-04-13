@@ -1,15 +1,23 @@
+@import '@styles/Themes/_variables.scss';
+
 #header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 10px;
-  border-bottom: 1px solid #d0d3d4;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+  background-color: $color-white;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   .user {
     display: flex;
     align-items: center;
     &__icon {
-      border: 2px solid #909497;
+      border: 2px solid $color-black-font;
       border-radius: 50%;
       margin-right: 10px;
       height: 40px;
@@ -17,6 +25,7 @@
   }
 
   .logo {
+    color: $color-green-theme;
     font-size: 22px;
     display: flex;
     align-items: center;
