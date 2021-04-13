@@ -7,18 +7,21 @@ export interface UserInterface {
   phone: string;
   username: string;
 }
-[];
 
 export interface FullName {
   firstname: string;
   lastname: string;
 }
 
+export interface CartsInterface {
+  [key: number]: CartInterface;
+}
+
 export interface CartInterface {
   id: number;
   userId: number;
   date: Date;
-  products: any[];
+  products: ProductInterface[];
 }
 
 export interface PreProduct {

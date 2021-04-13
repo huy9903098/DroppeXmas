@@ -1,10 +1,11 @@
 import * as types from '@store/styles';
+import { CartInterface, CartsInterface } from '@utils/types';
 
 const initialState = {
-  carts: {},
-  cart: {},
-  loading: false,
-  error: null,
+  carts: {} as CartsInterface,
+  cart: {} as CartInterface,
+  loading: false as boolean,
+  error: null as any,
 };
 
 export const cartReducer = (state = initialState, action) => {

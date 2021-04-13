@@ -5,7 +5,7 @@ const initialState = {
   users: [] as UserInterface[],
   user: {} as UserInterface,
   loading: false as boolean,
-  error: null,
+  error: null as any,
 };
 
 export const userReducer = (state = initialState, action) => {

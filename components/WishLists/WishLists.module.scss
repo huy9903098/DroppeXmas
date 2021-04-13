@@ -1,17 +1,11 @@
 @import '@styles/Themes/_position.scss';
 @import '@styles/Themes/_variables.scss';
 
-.cartContainer {
+.cartHeader {
   background-color: $color-white;
-  cursor: pointer;
   grid-template-columns: 1fr 1fr;
   display: grid;
   margin: 20px 0;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: $box-shadow;
-
-  .cartInfo {
-    text-transform: uppercase;
-  }
 }
