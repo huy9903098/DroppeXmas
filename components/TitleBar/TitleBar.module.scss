@@ -1,8 +1,10 @@
-.container {
+@import '@styles/Themes/_typography.scss';
+.title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
+  font-weight: bold;
 }
 
 .searchBox {

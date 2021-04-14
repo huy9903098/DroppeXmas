@@ -6,9 +6,15 @@ import { fetchProducts } from '@store/actions/productAction';
 
 interface WishListItemProps {
   user: UserInterface;
+  openModal(): any;
+  chooseUser(id: number): any;
 }
 
-export const WishListItem: React.FC<WishListItemProps> = ({ user }) => {
+export const WishListItem: React.FC<WishListItemProps> = ({
+  user,
+  openModal,
+  chooseUser,
+}) => {
   const dispatch = useDispatch();
   const { carts } = useSelector((state: RootStateOrAny) => state.cart);
   const {
@@ -39,12 +45,24 @@ export const WishListItem: React.FC<WishListItemProps> = ({ user }) => {
     }
   }, [carts]);
   return (
-    <div className={styles.cartContainer}>
-      <h3 className={styles.cartInfo}>{user.name.firstname}</h3>
+    <>
+      <div
+        className={styles.cart__container}
+        onClick={() => {
+          openModal();
+          chooseUser(user.id);
+        }}
+      >
+        <h3 className={`${styles.cart__info} ${styles.h3resp}`}>
+          {user.name.firstname}
+        </h3>
 
-      <div className={`${styles.flexCenter}`}>
-        {userProducts && !productsLoading ? `$` + totalCartPrice : 'loading...'}
+        <div className={`${styles.flexCenter}`}>
+          {userProducts && !productsLoading
+            ? `$` + totalCartPrice.toFixed(2)
+            : 'loading...'}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
