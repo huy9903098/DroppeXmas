@@ -1,6 +1,11 @@
 import * as types from '@store/styles';
 
 const initialState = {
+  cartProducts: {
+    products: [],
+    loading: false,
+    updateLoading: false,
+  },
   productsByUserId: {},
   productIdIdentical: {},
   loading: false as boolean,
@@ -9,10 +14,27 @@ const initialState = {
 
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.PRODUCTS_CART_LOADING:
+      return {
+        ...state,
+        cartProducts: {
+          ...state.cartProducts,
+          loading: true,
+        },
+      };
     case types.PRODUCT_LOADING:
       return {
         ...state,
         loading: true,
+      };
+    case types.GET_SINGLE_CART_PRODUCT:
+      return {
+        ...state,
+        cartProducts: {
+          products: action.payload,
+          loading: false,
+        },
+        loading: false,
       };
     case types.GET_DISCOUNT:
       return {

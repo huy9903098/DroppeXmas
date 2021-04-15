@@ -7,13 +7,13 @@ import { fetchProducts } from '@store/actions/productAction';
 interface WishListItemProps {
   user: UserInterface;
   openModal(): any;
-  chooseUser(id: number): any;
+  chooseCart(userId: number, cartId: number): any;
 }
 
 export const WishListItem: React.FC<WishListItemProps> = ({
   user,
   openModal,
-  chooseUser,
+  chooseCart,
 }) => {
   const dispatch = useDispatch();
   const { carts } = useSelector((state: RootStateOrAny) => state.cart);
@@ -49,7 +49,7 @@ export const WishListItem: React.FC<WishListItemProps> = ({
         className={styles.cart__container}
         onClick={() => {
           openModal();
-          chooseUser(user.id);
+          chooseCart(user.id, carts[user.id].id);
         }}
       >
         <h3 className={`${styles.cart__info} ${styles.h3resp}`}>

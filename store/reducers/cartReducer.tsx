@@ -3,6 +3,7 @@ import { CartInterface, CartsInterface } from '@utils/types';
 
 const initialState = {
   carts: {},
+  cart: {},
   loading: false as boolean,
   error: null as any,
 };
@@ -14,14 +15,7 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case types.GET_CART:
-      return {
-        ...state,
-        cart: action.payload,
-        loading: false,
-        error: null,
-      };
-    case types.GET_CART_PRODUCT:
+    case types.UPDATE_CART:
       return {
         ...state,
         carts: {
@@ -34,7 +28,13 @@ export const cartReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
-
+    case types.GET_CART:
+      return {
+        ...state,
+        cart: action.payload,
+        loading: false,
+        error: null,
+      };
     case types.GET_CARTS:
       return {
         ...state,

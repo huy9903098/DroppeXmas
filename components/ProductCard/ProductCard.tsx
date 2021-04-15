@@ -1,24 +1,33 @@
 import { ProductInterface } from '@utils/types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import styles from './ProductCard.module.scss';
 
 interface ProductCardProps {
-  product: ProductInterface;
-  editProduct(id: number, quantity: number): any;
+  product: any;
+  editProduct(id: number, quantity: number, discard: boolean): any;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   editProduct,
 }) => {
-  const { productIdIdentical, loading: productsLoading } = useSelector(
+  const { productIdIdentical } = useSelector(
     (state: RootStateOrAny) => state.product
   );
+  const [discard, setDiscard] = useState(false);
+
+  useEffect(() => {
+    setDiscard(product.discard);
+  }, []);
   const discountRatio =
     productIdIdentical[product.id] > 1
       ? productIdIdentical[product.id] / 10
       : 0;
+  const toggleDiscard = () => {
+    setDiscard(!discard);
+    editProduct(product.id, product.quantity, !discard);
+  };
   return (
     <div key={product.id} className={styles.product__container}>
       <div className={styles.product__image}>
@@ -31,7 +40,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <p>{product.category}</p>
         </div>
       </div>
-      <div>Discard</div>
+      <div>
+        <button onClick={toggleDiscard}>
+          {discard ? `Discarded` : `Discard`}
+        </button>
+      </div>
 
       <div>
         {
@@ -39,7 +52,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             type="number"
             min={0}
             value={product.quantity}
-            onChange={(e) => editProduct(product.id, parseInt(e.target.value))}
+            onChange={(e) => {
+              if (parseInt(e.target.value) === 0) {
+                setDiscard(true);
+              }
+
+              editProduct(
+                product.id,
+                parseInt(e.target.value),
+                parseInt(e.target.value) === 0 ? true : false
+              );
+            }}
           />
         }
       </div>

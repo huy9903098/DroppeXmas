@@ -1,7 +1,7 @@
 import * as types from '@store/styles';
 import { CartsInterface } from '@utils/types';
 import axios from 'axios';
-import { fetchProductsIdentical } from './productAction';
+import { updateProductsIdentical } from './productAction';
 import { fetchUsers } from './userAction';
 
 export const fetchCarts = () => (dispatch) => {
@@ -31,7 +31,6 @@ export const fetchCarts = () => (dispatch) => {
         }
       }
 
-      dispatch(fetchProductsIdentical(productDiscounts));
       dispatch(fetchUsers(five_users));
 
       dispatch({
@@ -47,76 +46,14 @@ export const fetchCarts = () => (dispatch) => {
     );
 };
 
-// export const fetchCartProducts = (products, userId) => (dispatch) => {
-//   dispatch(setCartLoading());
-//   let newProducts = products.map(async (product) => {
-//     return await axios
-//       .get(`https://fakestoreapi.com/products/${product.productId}`, {
-//         headers: {
-//           'Access-Control-Allow-Origin': '*',
-//         },
-//       })
-//       .then((resp) => {
-//         resp.data.quantity = product.quantity;
-
-//         return resp.data;
-//       })
-//       .catch((err) =>
-//         dispatch({
-//           type: types.GET_ERRORS,
-//           payload: err.response.data,
-//         })
-//       );
-//   });
-
-//   Promise.all(newProducts).then((products) => {
-//     dispatch({
-//       type: types.GET_CART_PRODUCT,
-//       payload: products,
-//       key: userId,
-//     });
-//   });
-// };
-
-// export const fetchCart = (userId) => (dispatch) => {
-//   dispatch(setCartLoading());
-//   if (userId >= 0) {
-//     axios
-//       .get(`https://fakestoreapi.com/carts/user/${userId}`)
-//       .then((res) => {
-//         //fetch products by product id provided
-//         if (res.data.length > 0) {
-//           let newProduct = res.data[0].products.map((product) => {
-//             return axios
-//               .get(`https://fakestoreapi.com/products/${product.productId}`)
-//               .then((resp) => {
-//                 resp.data.quantity = product.quantity;
-//                 return resp.data;
-//               });
-//           });
-//           Promise.all(newProduct).then((products) => {
-//             res.data[0].products = products;
-
-//             dispatch({
-//               type: types.GET_CART,
-//               payload: res.data[0],
-//             });
-//           });
-//         } else {
-//           dispatch({
-//             type: types.GET_CART,
-//             payload: res.data[0],
-//           });
-//         }
-//       })
-//       .catch((err) =>
-//         dispatch({
-//           type: types.GET_ERRORS,
-//           payload: err.response.data,
-//         })
-//       );
-//   }
-// };
+export const updateCart = (products, userId) => (dispatch) => {
+  dispatch(setCartLoading());
+  dispatch({
+    type: types.UPDATE_CART,
+    payload: products,
+    key: userId,
+  });
+};
 
 // Set loading state
 export const setCartLoading = () => {
