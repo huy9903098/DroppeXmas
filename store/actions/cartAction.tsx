@@ -47,6 +47,37 @@ export const fetchCarts = () => (dispatch) => {
     );
 };
 
+// export const fetchCartProducts = (products, userId) => (dispatch) => {
+//   dispatch(setCartLoading());
+//   let newProducts = products.map(async (product) => {
+//     return await axios
+//       .get(`https://fakestoreapi.com/products/${product.productId}`, {
+//         headers: {
+//           'Access-Control-Allow-Origin': '*',
+//         },
+//       })
+//       .then((resp) => {
+//         resp.data.quantity = product.quantity;
+
+//         return resp.data;
+//       })
+//       .catch((err) =>
+//         dispatch({
+//           type: types.GET_ERRORS,
+//           payload: err.response.data,
+//         })
+//       );
+//   });
+
+//   Promise.all(newProducts).then((products) => {
+//     dispatch({
+//       type: types.GET_CART_PRODUCT,
+//       payload: products,
+//       key: userId,
+//     });
+//   });
+// };
+
 // export const fetchCart = (userId) => (dispatch) => {
 //   dispatch(setCartLoading());
 //   if (userId >= 0) {

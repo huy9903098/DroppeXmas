@@ -1,7 +1,7 @@
 import * as types from '@store/styles';
 
 const initialState = {
-  products: {},
+  productsByUserId: {},
   productIdIdentical: {},
   loading: false as boolean,
   error: null as any,
@@ -23,8 +23,8 @@ export const productReducer = (state = initialState, action) => {
       };
     case types.GET_PRODUCT:
       return Object.assign({}, state, {
-        products: {
-          ...state.products,
+        productsByUserId: {
+          ...state.productsByUserId,
           [action.key]: action.payload,
         },
         loading: false,

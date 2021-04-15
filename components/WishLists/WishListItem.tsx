@@ -18,16 +18,15 @@ export const WishListItem: React.FC<WishListItemProps> = ({
   const dispatch = useDispatch();
   const { carts } = useSelector((state: RootStateOrAny) => state.cart);
   const {
-    products,
+    productsByUserId,
     productIdIdentical,
     loading: productsLoading,
   } = useSelector((state: RootStateOrAny) => state.product);
   const [totalCartPrice, setTotalCartPrice] = useState(0);
-  let userProducts = products[user.id];
+  let userProducts = productsByUserId[user.id];
 
   useEffect(() => {
     if (userProducts && productIdIdentical) {
-      // console.log('userID', user.id, userProducts);
       let sum = 0;
       userProducts.map((product) => {
         sum += product.price * product.quantity;

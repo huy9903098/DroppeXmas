@@ -12,7 +12,7 @@ export const fetchProducts = (products, userId) => (dispatch) => {
       })
       .then((resp) => {
         resp.data.quantity = product.quantity;
-
+        resp.data.discard = false;
         return resp.data;
       })
       .catch((err) =>
@@ -22,6 +22,7 @@ export const fetchProducts = (products, userId) => (dispatch) => {
         })
       );
   });
+  //update cart then update with new data
 
   Promise.all(newProducts).then((products) => {
     dispatch({
