@@ -132,7 +132,6 @@ export const updateProductsIdentical = (carts) => (dispatch) => {
       }
     });
   }
-  console.log('productDiscounts', productDiscounts);
 
   dispatch({
     type: types.GET_DISCOUNT,

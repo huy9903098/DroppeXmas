@@ -2,6 +2,7 @@ import { ProductInterface } from '@utils/types';
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import styles from './ProductCard.module.scss';
+import { Discard } from '@utils/icons/index';
 
 interface ProductCardProps {
   product: any;
@@ -16,6 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     (state: RootStateOrAny) => state.product
   );
   const [discard, setDiscard] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     setDiscard(product.discard);
@@ -33,17 +35,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className={styles.product__image}>
         <img src={product.image} />
       </div>
-      <div className={styles.product__desc}>
+      <div className={styles.product__info}>
         <div>
           <h2>{product.title}</h2>
           <p>${product.price}</p>
           <p>{product.category}</p>
         </div>
       </div>
-      <div>
-        <button onClick={toggleDiscard}>
-          {discard ? `Discarded` : `Discard`}
-        </button>
+      <div className={styles.product__discard}>
+        <Discard
+          className={styles.product__discard__icon}
+          onClick={toggleDiscard}
+        />
       </div>
 
       <div>
@@ -69,6 +72,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div>
         ${(product.price * product.quantity).toFixed(2)} $
         {(product.price * product.quantity * discountRatio).toFixed(2)}
+      </div>
+      <div
+        className={
+          showMore ? styles.product__desc__show : styles.product__desc__hide
+        }
+      >
+        Description: {product.description}
+      </div>
+      <div
+        className={styles.product__showmore}
+        onClick={() => setShowMore(!showMore)}
+      >
+        Show more
       </div>
     </div>
   );
