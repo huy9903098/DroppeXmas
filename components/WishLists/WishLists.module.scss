@@ -1,0 +1,11 @@
+@import '@styles/Themes/_position.scss';
+@import '@styles/Themes/_variables.scss';
+@import '@styles/Themes/_typography.scss';
+.cartHeader {
+  background-color: $color-white;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  border-radius: 5px;
+}

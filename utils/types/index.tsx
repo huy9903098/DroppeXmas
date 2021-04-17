@@ -7,18 +7,25 @@ export interface UserInterface {
   phone: string;
   username: string;
 }
-[];
 
 export interface FullName {
   firstname: string;
   lastname: string;
 }
 
+export interface CartsInterface {
+  [key: number]: CartInterface;
+}
+
+export interface ProductDiscounts {
+  [key: number]: number;
+}
+
 export interface CartInterface {
   id: number;
   userId: number;
   date: Date;
-  products: any[];
+  products: PreProduct[];
 }
 
 export interface PreProduct {
@@ -34,4 +41,5 @@ export interface ProductInterface {
   category: string;
   image: string;
   quantity: number;
+  discard?: boolean;
 }

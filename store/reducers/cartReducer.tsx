@@ -1,10 +1,9 @@
-import * as types from '@store/styles';
+import * as types from '@store/types';
+import { CartsInterface } from '@utils/types';
 
 const initialState = {
-  carts: {},
-  cart: {},
-  loading: false,
-  error: null,
+  carts: {} as CartsInterface,
+  loading: false as boolean,
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -13,6 +12,19 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case types.UPDATE_CART:
+      return {
+        ...state,
+        carts: {
+          ...state.carts,
+          [action.key]: {
+            ...state.carts[action.key],
+            products: action.payload,
+          },
+        },
+        loading: false,
+        error: null,
       };
     case types.GET_CART:
       return {

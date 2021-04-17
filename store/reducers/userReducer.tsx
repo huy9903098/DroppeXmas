@@ -1,11 +1,10 @@
-import * as types from '@store/styles';
+import * as types from '@store/types';
 import { UserInterface } from '@utils/types';
 
 const initialState = {
   users: [] as UserInterface[],
   user: {} as UserInterface,
   loading: false as boolean,
-  error: null,
 };
 
 export const userReducer = (state = initialState, action) => {
