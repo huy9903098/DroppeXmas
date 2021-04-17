@@ -28,6 +28,9 @@
 
   .save {
     text-align: center;
+    .pending {
+      opacity: 0.5;
+    }
     &__button {
       font-weight: bold;
       background: $color-green-theme;

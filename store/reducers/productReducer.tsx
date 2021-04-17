@@ -1,19 +1,39 @@
 import * as types from '@store/types';
-import { ProductInterface } from '@utils/types';
+import {
+  ProductDiscounts,
+  ProductInterface,
+  ProductObjectByUser,
+} from '@utils/types';
 
 const initialState = {
   cartProducts: {
     products: [] as ProductInterface[],
-    loading: false,
-    updateLoading: false,
+    loading: false as boolean,
+    updateLoading: false as boolean,
   },
-  productsByUserId: {},
-  productIdIdentical: {},
+  productsByUserId: {} as ProductObjectByUser,
+  productIdIdentical: {} as ProductDiscounts,
   loading: false as boolean,
 };
 
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.PRODUCTS_CART_UPDATE_LOADING:
+      return {
+        ...state,
+        cartProducts: {
+          ...state.cartProducts,
+          updateLoading: true,
+        },
+      };
+    case types.PRODUCTS_CART_UPDATE_CLEAR:
+      return {
+        ...state,
+        cartProducts: {
+          ...state.cartProducts,
+          updateLoading: false,
+        },
+      };
     case types.PRODUCTS_CART_LOADING:
       return {
         ...state,
@@ -43,7 +63,7 @@ export const productReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
-    case types.GET_PRODUCT:
+    case types.GET_PRODUCTS:
       return Object.assign({}, state, {
         productsByUserId: {
           ...state.productsByUserId,

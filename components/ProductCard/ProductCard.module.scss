@@ -167,6 +167,14 @@
   }
 
   &__price {
+    .discount {
+      color: $color-dark-green;
+      background: $color-white;
+      padding: 0.3rem 1rem;
+      font-weight: 600;
+      border: 1px solid $color-dark-green;
+      border-radius: 5px;
+    }
     align-self: center;
     justify-self: right;
     font-weight: 500;

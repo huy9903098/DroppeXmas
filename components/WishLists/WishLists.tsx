@@ -4,15 +4,18 @@ import { useEffect } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { fetchCarts } from '@store/actions/cartAction';
 import styles from './WishLists.module.scss';
-import { Modal } from '@components/Modal/Modal';
-import { CartModal } from '@components/Modal/Cart/CartModal';
 import { updateProductsIdentical } from '@store/actions/productAction';
+import { Modal } from '@components/Modal/Modal';
+import { Cart } from '@components/Cart/Cart';
 
 interface WishListsProps {}
 
 export const WishLists: React.FC<WishListsProps> = ({}) => {
   const dispatch = useDispatch();
   const { users, loading } = useSelector((state: RootStateOrAny) => state.user);
+  const { productsByUserId } = useSelector(
+    (state: RootStateOrAny) => state.product
+  );
   const { carts } = useSelector((state: RootStateOrAny) => state.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalUserId, setModalUserId] = useState(0);
@@ -38,10 +41,10 @@ export const WishLists: React.FC<WishListsProps> = ({}) => {
       </div>
 
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <CartModal userId={modalUserId} cartId={modalCartId} />
+        <Cart userId={modalUserId} cartId={modalCartId} />
       </Modal>
 
-      {users && !loading ? (
+      {users && productsByUserId && !loading ? (
         users.map(function (user) {
           return (
             <WishListItem

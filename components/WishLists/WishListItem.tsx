@@ -45,23 +45,29 @@ export const WishListItem: React.FC<WishListItemProps> = ({
   }, [carts]);
   return (
     <>
-      <div
-        className={styles.cart__container}
-        onClick={() => {
-          openModal();
-          chooseCart(user.id, carts[user.id].id);
-        }}
-      >
-        <h3 className={`${styles.cart__info} ${styles.h3resp}`}>
-          {user.name.firstname}
-        </h3>
+      {userProducts && !productsLoading ? (
+        <div
+          className={styles.cart__container}
+          onClick={() => {
+            openModal();
+            chooseCart(user.id, carts[user.id].id);
+          }}
+        >
+          <h3 className={`${styles.cart__info} ${styles.h3resp}`}>
+            {user.name.firstname}
+          </h3>
 
-        <div className={`${styles.flexCenter} ${styles.h4resp}`}>
-          {userProducts && !productsLoading
-            ? `$` + totalCartPrice.toFixed(2)
-            : 'loading...'}
+          <div className={`${styles.flexCenter} ${styles.h4resp}`}>
+            ${totalCartPrice.toFixed(2)}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={styles.cart__container}>
+          <h3 className={`${styles.cart__info} ${styles.h3resp}`}>
+            Loading ...
+          </h3>
+        </div>
+      )}
     </>
   );
 };

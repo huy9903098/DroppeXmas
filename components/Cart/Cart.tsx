@@ -1,25 +1,25 @@
 import { ProductCard } from '@components/ProductCard/ProductCard';
-import { TitleBar } from '@components/TitleBar/TitleBar';
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import styles from './CartModal.module.scss';
+import styles from './Cart.module.scss';
 import {
   fetchProductsByCartId,
   updateProductsByCartId,
 } from '@store/actions/productAction';
+import { SuccessModal } from '@components/Modal/Success/SuccessModal';
+import { PreProduct, ProductInterface } from '@utils/types';
 
-interface CartModalProps {
+interface CartProps {
   userId: number;
   cartId: number;
 }
 
-export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
+export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
   const { cartProducts, productIdIdentical } = useSelector(
     (state: RootStateOrAny) => state.product
   );
-  const { carts, loading: cartsLoading } = useSelector(
-    (state: RootStateOrAny) => state.cart
-  );
+
+  const { carts } = useSelector((state: RootStateOrAny) => state.cart);
 
   const { users } = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
@@ -27,12 +27,11 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
   const [subTotalCartPrice, setSubTotalCartPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(0);
   const [editProducts, setEditProducts] = useState(null);
+  const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchProductsByCartId(carts[userId].products));
-    }
-  }, [userId]);
+    dispatch(fetchProductsByCartId(carts[userId].products));
+  }, []);
 
   useEffect(() => {
     if (cartProducts.products && productIdIdentical) {
@@ -61,7 +60,7 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
   };
 
   const saveCart = () => {
-    let finalCart = [];
+    let finalCart = [] as PreProduct[];
 
     for (let a = 0; a < editProducts.length; a++) {
       finalCart.push({
@@ -69,7 +68,11 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
         quantity: editProducts[a].discard ? 0 : editProducts[a].quantity,
       });
     }
-    dispatch(updateProductsByCartId(finalCart, userId, cartId));
+    dispatch(
+      updateProductsByCartId(finalCart, userId, cartId, (success) => {
+        setUpdateState(success);
+      })
+    );
   };
 
   const editProduct = (productId, quantity, discard) => {
@@ -85,6 +88,19 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
   };
   return (
     <div className={styles.cartmodal}>
+      <SuccessModal open={updateState} onClose={() => setUpdateState(false)}>
+        <div className={styles.succsModal}>
+          <div>Successfully Updated</div>
+          {editProducts &&
+            editProducts.map((product) => {
+              return (
+                <div key={product.id}>
+                  {product.title}x{product.quantity}
+                </div>
+              );
+            })}
+        </div>
+      </SuccessModal>
       <div className={styles.cartmodal__header}>
         <h1>
           {users[userId]
@@ -95,14 +111,10 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
       {editProducts && !cartProducts.loading ? (
         editProducts.map((product) => {
           return (
-            <>
-              <ProductCard
-                key={product.id}
-                product={product}
-                editProduct={editProduct}
-              />
+            <div key={product.id}>
+              <ProductCard product={product} editProduct={editProduct} />
               <hr />
-            </>
+            </div>
           );
         })
       ) : (
@@ -135,10 +147,12 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
         </p>
         <p className={styles.save}>
           <button
-            className={`${styles.save__button} ${styles.btnInputSquare} ${styles.h4resp}`}
+            className={`${styles.save__button} ${styles.btnInputSquare} ${
+              styles.h4resp
+            } ${cartProducts.updateLoading ? styles.pending : null}`}
             onClick={saveCart}
           >
-            Save
+            {cartProducts.updateLoading ? 'Pending...' : 'Save'}
           </button>
         </p>
       </div>

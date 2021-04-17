@@ -1,5 +1,10 @@
 import * as types from '@store/types';
-import { CartsInterface, ProductDiscounts } from '@utils/types';
+import {
+  CartsInterface,
+  PreProduct,
+  ProductDiscounts,
+  ProductInterface,
+} from '@utils/types';
 import axios from 'axios';
 import { fetchUsers } from './userAction';
 
@@ -46,12 +51,17 @@ export const fetchCarts = () => (dispatch) => {
     );
 };
 
-export const updateCart = (products, userId) => (dispatch) => {
+export const updateCart = (products: PreProduct[], userId: number) => (
+  dispatch
+) => {
   dispatch(setCartLoading());
   dispatch({
     type: types.UPDATE_CART,
     payload: products,
     key: userId,
+  });
+  dispatch({
+    type: types.PRODUCTS_CART_UPDATE_CLEAR,
   });
 };
 
