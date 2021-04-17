@@ -3,16 +3,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
   font-weight: bold;
-}
-
-.searchBox {
-  background: url('/searchIcon.svg') left center no-repeat;
-  background-size: 1rem 1rem;
-  background-position: 5% 50%;
-  outline: none;
-  padding: 5px 2rem 5px 2rem;
-  border: 1px solid #909497;
-  border-radius: 15px;
 }

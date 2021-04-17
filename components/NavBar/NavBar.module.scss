@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10px;
+  padding: 1.25rem 0.625rem;
   box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
   background-color: $color-white;
 
@@ -23,7 +23,7 @@
     &__icon {
       border: 2px solid $color-black-font;
       border-radius: 50%;
-      margin-right: 10px;
+      margin-right: 0.625rem;
       height: 40px;
     }
   }

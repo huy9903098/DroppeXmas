@@ -12,7 +12,10 @@ export const Modal: React.FC<ModalProps> = ({ open, children, onClose }) => {
     <>
       <div className={styles.overlay} onClick={onClose}></div>
       <div className={styles.modal}>
-        <button onClick={onClose}>Close modal</button>
+        <div className={styles.closeContainer} onClick={onClose}>
+          <div className={styles.leftright}></div>
+          <div className={styles.rightleft}></div>
+        </div>
         {children}
       </div>
     </>

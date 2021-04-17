@@ -1,15 +1,15 @@
-import * as types from '@store/styles';
+import * as types from '@store/types';
+import { ProductInterface } from '@utils/types';
 
 const initialState = {
   cartProducts: {
-    products: [],
+    products: [] as ProductInterface[],
     loading: false,
     updateLoading: false,
   },
   productsByUserId: {},
   productIdIdentical: {},
   loading: false as boolean,
-  error: null as any,
 };
 
 export const productReducer = (state = initialState, action) => {

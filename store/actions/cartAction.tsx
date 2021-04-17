@@ -1,7 +1,6 @@
-import * as types from '@store/styles';
-import { CartsInterface } from '@utils/types';
+import * as types from '@store/types';
+import { CartsInterface, ProductDiscounts } from '@utils/types';
 import axios from 'axios';
-import { updateProductsIdentical } from './productAction';
 import { fetchUsers } from './userAction';
 
 export const fetchCarts = () => (dispatch) => {
@@ -16,10 +15,11 @@ export const fetchCarts = () => (dispatch) => {
       let five_carts: CartsInterface = {};
       // make 5 carts an object with userID as key ==> to access data with O(1)
       let five_users: number[] = [];
-      let productDiscounts = {};
+      let productDiscounts: ProductDiscounts = {};
       for (let a = 0; a < res.data.length; a++) {
         if (!five_carts[res.data[a].userId]) {
           five_carts[res.data[a].userId] = res.data[a];
+
           five_users.push(res.data[a].userId);
           res.data[a].products.map((product) => {
             if (!productDiscounts[product.productId]) {

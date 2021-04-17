@@ -20,6 +20,8 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
   const { carts, loading: cartsLoading } = useSelector(
     (state: RootStateOrAny) => state.cart
   );
+
+  const { users } = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
   const [subTotalCartPrice, setSubTotalCartPrice] = useState(0);
@@ -27,8 +29,10 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
   const [editProducts, setEditProducts] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchProductsByCartId(carts[userId].products));
-  }, []);
+    if (userId) {
+      dispatch(fetchProductsByCartId(carts[userId].products));
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (cartProducts.products && productIdIdentical) {
@@ -65,7 +69,7 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
         quantity: editProducts[a].discard ? 0 : editProducts[a].quantity,
       });
     }
-    dispatch(updateProductsByCartId(finalCart, userId));
+    dispatch(updateProductsByCartId(finalCart, userId, cartId));
   };
 
   const editProduct = (productId, quantity, discard) => {
@@ -80,41 +84,63 @@ export const CartModal: React.FC<CartModalProps> = ({ userId, cartId }) => {
     setEditProducts(newProducts);
   };
   return (
-    <div>
-      <TitleBar />
+    <div className={styles.cartmodal}>
+      <div className={styles.cartmodal__header}>
+        <h1>
+          {users[userId]
+            ? `${users[userId].name.firstname}'s List`
+            : `loading...`}
+        </h1>
+      </div>
       {editProducts && !cartProducts.loading ? (
         editProducts.map((product) => {
           return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              editProduct={editProduct}
-            />
+            <>
+              <ProductCard
+                key={product.id}
+                product={product}
+                editProduct={editProduct}
+              />
+              <hr />
+            </>
           );
         })
       ) : (
         <div>Loading...</div>
       )}
-      <div>
-        <div>
-          Subtotal:{' '}
-          {!cartProducts.loading
-            ? subTotalCartPrice.toFixed(2)
-            : `Calculating ... `}
-        </div>
-        <div>
-          Discount:{' '}
-          {!cartProducts.loading
-            ? discountPrice.toFixed(2)
-            : `Calculating ... `}
-        </div>
-        <div>
-          Total:{' '}
-          {!cartProducts.loading
-            ? totalCartPrice.toFixed(2)
-            : `Calculating ... `}
-        </div>
-        <button onClick={saveCart}>Save</button>
+      <div className={styles.cartSummary}>
+        <p className={styles.paragraph}>
+          Subtotal:
+          <span className={styles.right}>
+            {!cartProducts.loading
+              ? `$${subTotalCartPrice.toFixed(2)}`
+              : `Calculating ... `}
+          </span>
+        </p>
+        <p className={styles.paragraph}>
+          Discount:
+          <span className={styles.right}>
+            {!cartProducts.loading
+              ? `- $${discountPrice.toFixed(2)}`
+              : `Calculating ... `}
+          </span>
+        </p>
+        <p className={styles.h3resp}>
+          Total:
+          <span className={styles.right}>
+            {!cartProducts.loading
+              ? `$${totalCartPrice.toFixed(2)}`
+              : `Calculating ... `}
+          </span>
+        </p>
+        <p className={styles.save}>
+          <button
+            className={`${styles.save__button} ${styles.btnInputSquare} ${styles.h4resp}`}
+            onClick={saveCart}
+          >
+            Save
+          </button>
+        </p>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@
 
 .h3resp {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 28px;
 
   @media only screen and (min-width: 48em) {
@@ -42,6 +42,11 @@
   }
 }
 
+.h4resp {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 28px;
+}
 .paragraph {
   line-height: 25px;
 

@@ -56,7 +56,7 @@ export const WishListItem: React.FC<WishListItemProps> = ({
           {user.name.firstname}
         </h3>
 
-        <div className={`${styles.flexCenter}`}>
+        <div className={`${styles.flexCenter} ${styles.h4resp}`}>
           {userProducts && !productsLoading
             ? `$` + totalCartPrice.toFixed(2)
             : 'loading...'}
