@@ -20,10 +20,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    if (product.quantity === 0) {
-      setDiscard(product.discard);
-    }
-  }, []);
+    setDiscard(product.discard);
+  }, [product.discard]);
+
   const discountRatio =
     productIdIdentical[product.id] > 1
       ? productIdIdentical[product.id] / 10

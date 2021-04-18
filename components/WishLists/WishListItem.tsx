@@ -29,7 +29,7 @@ export const WishListItem: React.FC<WishListItemProps> = ({
     if (userProducts && productIdIdentical) {
       let sum = 0;
       userProducts.map((product) => {
-        sum += product.price * product.quantity;
+        sum += !product.discard ? product.price * product.quantity : 0;
         if (productIdIdentical[product.id] > 1) {
           sum *= 1 - productIdIdentical[product.id] / 10;
         }
