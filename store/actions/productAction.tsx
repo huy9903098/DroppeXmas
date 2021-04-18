@@ -17,7 +17,7 @@ export const fetchProducts = (products: PreProduct[], userId: number) => (
       })
       .then((resp) => {
         resp.data.quantity = product.quantity;
-        // inclue quanityt for total price display
+        // include quanity for total price display on the item
         return resp.data;
       })
       .catch((err) =>
@@ -79,7 +79,7 @@ export const updateProductsByCartId = (
       // can't use res.data from API because there are 2 carts with id=6 so it will provide with wrong information
       callback(true);
       dispatch(updateCart(products, userId));
-      // This function will update the cart directly into the local state when successfully update cart
+      // This function will update the cart directly into the local state when cart is update successfully into the database
     })
     .catch((err) => {
       callback(false);
