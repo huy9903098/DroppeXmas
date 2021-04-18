@@ -19,8 +19,6 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
     (state: RootStateOrAny) => state.product
   );
 
-  const { carts } = useSelector((state: RootStateOrAny) => state.cart);
-
   const { users } = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);

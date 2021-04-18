@@ -38,7 +38,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           discard ? styles.disabled : null
         }`}
       >
-        <img src={product.image} />
+        <img data-testid="product-img" src={product.image} />
       </div>
       <div
         className={`${styles.product__info} ${
@@ -47,7 +47,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       >
         <div>
           <h2>{product.title}</h2>
-          <p className={styles.price}>${product.price}</p>
+          <p data-testid="product-price" className={styles.price}>
+            ${product.price}
+          </p>
           <a href="#">{product.category}</a>
         </div>
       </div>
