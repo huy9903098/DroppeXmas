@@ -1,8 +1,20 @@
 @import '@styles/Themes/_typography.scss';
+@import '@styles/Themes/_buttons.scss';
+@import '@styles/Themes/_variables.scss';
 .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3.125rem;
+  margin: 3.125rem 0rem;
   font-weight: bold;
+  .offer {
+    color: $color-white;
+    background: $color-red-bright;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 5px 10px;
+    margin: 3px 0;
+    border-radius: 6px;
+  }
 }

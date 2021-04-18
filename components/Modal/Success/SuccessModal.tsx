@@ -17,7 +17,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
       <div className={styles.overlay} onClick={onClose}></div>
       <div className={styles.success}>
         {children}
-        <p>
+        <p className={styles.confirmation}>
           <button
             onClick={onClose}
             className={`${styles.button} ${styles.btnInputSquare}`}

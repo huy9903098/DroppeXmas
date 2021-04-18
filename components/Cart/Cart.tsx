@@ -15,7 +15,7 @@ interface CartProps {
 }
 
 export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
-  const { cartProducts, productIdIdentical } = useSelector(
+  const { cartProducts, productsByUserId, productIdIdentical } = useSelector(
     (state: RootStateOrAny) => state.product
   );
 
@@ -30,7 +30,7 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
   const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProductsByCartId(carts[userId].products));
+    dispatch(fetchProductsByCartId(productsByUserId[userId]));
   }, []);
 
   useEffect(() => {
@@ -88,74 +88,97 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
   };
   return (
     <div className={styles.cartmodal}>
-      <SuccessModal open={updateState} onClose={() => setUpdateState(false)}>
-        <div className={styles.succsModal}>
-          <div>Successfully Updated</div>
-          {editProducts &&
-            editProducts.map((product) => {
-              return (
-                <div key={product.id}>
-                  {product.title}x{product.quantity}
-                </div>
-              );
-            })}
-        </div>
-      </SuccessModal>
-      <div className={styles.cartmodal__header}>
-        <h1>
-          {users[userId]
-            ? `${users[userId].name.firstname}'s List`
-            : `loading...`}
-        </h1>
-      </div>
       {editProducts && !cartProducts.loading ? (
-        editProducts.map((product) => {
-          return (
-            <div key={product.id}>
-              <ProductCard product={product} editProduct={editProduct} />
-              <hr />
+        <>
+          <SuccessModal
+            open={updateState}
+            onClose={() => setUpdateState(false)}
+          >
+            <div className={styles.success}>
+              <div>Successfully Updated</div>
+
+              {editProducts &&
+                editProducts.map((product) => {
+                  if (product.quantity === 0 || product.discard) {
+                    return;
+                  }
+                  let price =
+                    productIdIdentical[product.id] > 1
+                      ? product.price *
+                        product.quantity *
+                        (1 - productIdIdentical[product.id] / 10)
+                      : product.price * product.quantity;
+                  return (
+                    <div className={styles.success__summary} key={product.id}>
+                      <div className={styles.floatLeft}>
+                        {product.title}x{product.quantity}
+                      </div>
+                      <div className={styles.floatRight}>${price}</div>
+                    </div>
+                  );
+                })}
+
+              <div className={styles.success__summary}>
+                <div className={styles.floatLeft}>Total</div>
+                <div className={styles.floatRight}>${totalCartPrice}</div>
+              </div>
             </div>
-          );
-        })
+          </SuccessModal>
+          <div className={styles.cartmodal__header}>
+            <h1>
+              {users[userId]
+                ? `${users[userId].name.firstname}'s List`
+                : `loading...`}
+            </h1>
+          </div>
+          {editProducts.map((product) => {
+            return (
+              <div key={product.id}>
+                <ProductCard product={product} editProduct={editProduct} />
+                <hr />
+              </div>
+            );
+          })}
+          <div className={styles.cartSummary}>
+            <p className={styles.paragraph}>
+              Subtotal:
+              <span className={styles.right}>
+                {!cartProducts.loading
+                  ? `$${subTotalCartPrice.toFixed(2)}`
+                  : `Calculating ... `}
+              </span>
+            </p>
+            <p className={styles.paragraph}>
+              Discount:
+              <span className={styles.right}>
+                {!cartProducts.loading
+                  ? `- $${discountPrice.toFixed(2)}`
+                  : `Calculating ... `}
+              </span>
+            </p>
+            <p className={styles.h3resp}>
+              Total:
+              <span className={styles.right}>
+                {!cartProducts.loading
+                  ? `$${totalCartPrice.toFixed(2)}`
+                  : `Calculating ... `}
+              </span>
+            </p>
+            <p className={styles.save}>
+              <button
+                className={`${styles.save__button} ${styles.btnInputSquare} ${
+                  styles.h4resp
+                } ${cartProducts.updateLoading ? styles.pending : null}`}
+                onClick={saveCart}
+              >
+                {cartProducts.updateLoading ? 'Pending...' : 'Save'}
+              </button>
+            </p>
+          </div>
+        </>
       ) : (
         <div>Loading...</div>
       )}
-      <div className={styles.cartSummary}>
-        <p className={styles.paragraph}>
-          Subtotal:
-          <span className={styles.right}>
-            {!cartProducts.loading
-              ? `$${subTotalCartPrice.toFixed(2)}`
-              : `Calculating ... `}
-          </span>
-        </p>
-        <p className={styles.paragraph}>
-          Discount:
-          <span className={styles.right}>
-            {!cartProducts.loading
-              ? `- $${discountPrice.toFixed(2)}`
-              : `Calculating ... `}
-          </span>
-        </p>
-        <p className={styles.h3resp}>
-          Total:
-          <span className={styles.right}>
-            {!cartProducts.loading
-              ? `$${totalCartPrice.toFixed(2)}`
-              : `Calculating ... `}
-          </span>
-        </p>
-        <p className={styles.save}>
-          <button
-            className={`${styles.save__button} ${styles.btnInputSquare} ${
-              styles.h4resp
-            } ${cartProducts.updateLoading ? styles.pending : null}`}
-            onClick={saveCart}
-          >
-            {cartProducts.updateLoading ? 'Pending...' : 'Save'}
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

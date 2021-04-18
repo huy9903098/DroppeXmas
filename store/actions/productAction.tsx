@@ -39,32 +39,13 @@ export const fetchProducts = (products: PreProduct[], userId: number) => (
 export const fetchProductsByCartId = (products) => (dispatch) => {
   dispatch(setCartProductsLoading());
 
-  let newProducts = products.map(async (product) => {
-    return await axios
-      .get(`https://fakestoreapi.com/products/${product.productId}`, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
-      .then((resp) => {
-        resp.data.quantity = product.quantity;
-        resp.data.discard = false;
-        return resp.data;
-      })
-      .catch((err) =>
-        dispatch({
-          type: types.GET_ERRORS,
-          payload: err.response.data,
-        })
-      );
-  });
-  //get products for seperate cart
+  for (let a = 0; a < products.length; a++) {
+    products[a].discard = false;
+  }
 
-  Promise.all(newProducts).then((products) => {
-    dispatch({
-      type: types.GET_SINGLE_CART_PRODUCT,
-      payload: products,
-    });
+  dispatch({
+    type: types.GET_SINGLE_CART_PRODUCT,
+    payload: products,
   });
 };
 
@@ -75,12 +56,21 @@ export const updateProductsByCartId = (
   callback
 ) => (dispatch) => {
   dispatch(setCartProductsUpdateLoading());
+
   axios
-    .put(`https://fakestoreapi.com/carts/${cartId}`, {
-      userId: userId,
-      date: new Date(),
-      products,
-    })
+    .put(
+      `https://fakestoreapi.com/carts/${cartId}`,
+      {
+        userId: userId,
+        date: new Date(),
+        products,
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    )
     .then((res) => {
       // UPDATED CARTS
       // callback(res.data)

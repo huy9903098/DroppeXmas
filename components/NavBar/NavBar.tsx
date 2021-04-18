@@ -16,7 +16,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
       <nav>
         <a className={styles.user} href="#">
-          <img className={styles.user__icon} src="/user.svg" /> Clarance
+          <img className={styles.user__icon} src="/user.svg" />{' '}
+          <span>User</span>
         </a>
       </nav>
     </header>

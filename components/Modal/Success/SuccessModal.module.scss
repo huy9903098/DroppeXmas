@@ -26,14 +26,17 @@
   z-index: 1000;
 }
 
-.button {
-  font-weight: bold;
-  background: $color-green-theme;
-  color: $color-white;
+.confirmation {
+  text-align: center;
+  .button {
+    font-weight: bold;
+    background: $color-green-theme;
+    color: $color-white;
 
-  cursor: pointer;
-  width: 5em;
-  &:hover {
-    opacity: 0.7;
+    cursor: pointer;
+    width: 5em;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
