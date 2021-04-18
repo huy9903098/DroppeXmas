@@ -3,13 +3,13 @@ import { UserInterface } from '@utils/types';
 
 const initialState = {
   users: [] as UserInterface[],
-  user: {} as UserInterface,
+  usersById: {},
   loading: false as boolean,
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.USER_LOADING:
+    case types.USERS_LOADING:
       return {
         ...state,
         loading: true,
@@ -24,7 +24,10 @@ export const userReducer = (state = initialState, action) => {
     case types.GET_USER:
       return {
         ...state,
-        user: action.payload,
+        usersById: {
+          ...state.usersById,
+          [action.key]: action.payload,
+        },
         loading: false,
         error: null,
       };

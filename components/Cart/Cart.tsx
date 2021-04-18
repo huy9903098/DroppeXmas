@@ -19,7 +19,7 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
     (state: RootStateOrAny) => state.product
   );
 
-  const { users } = useSelector((state: RootStateOrAny) => state.user);
+  const { usersById } = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
   const [subTotalCartPrice, setSubTotalCartPrice] = useState(0);
@@ -129,8 +129,8 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
           </SuccessModal>
           <div className={styles.cartmodal__header}>
             <h1>
-              {users[userId]
-                ? `${users[userId].name.firstname}'s List`
+              {usersById[userId]
+                ? `${usersById[userId].name.firstname}'s List`
                 : `loading...`}
             </h1>
           </div>

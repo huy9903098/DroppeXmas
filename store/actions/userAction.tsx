@@ -3,7 +3,7 @@ import { UserInterface } from '@utils/types';
 import axios from 'axios';
 
 export const fetchUsers = (users: number[]) => (dispatch) => {
-  dispatch(setUserLoading());
+  dispatch(setUsersLoading());
   let newUsers = [];
   for (let a = 0; a < users.length; a++) {
     newUsers.push(
@@ -14,7 +14,10 @@ export const fetchUsers = (users: number[]) => (dispatch) => {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((res) => res.data)
+        .then((res) => {
+          dispatch(assignUserById(res.data));
+          return res.data;
+        })
         .catch((err) =>
           dispatch({
             type: types.GET_ERRORS,
@@ -39,10 +42,24 @@ export const fetchUsers = (users: number[]) => (dispatch) => {
     );
 };
 
+export const assignUserById = (user) => (dispatch) => {
+  dispatch({
+    type: types.GET_USER,
+    payload: user,
+    key: user.id,
+  });
+};
+
 // Set loading state
 export const setUserLoading = () => {
   return {
     type: types.USER_LOADING,
+  };
+};
+
+export const setUsersLoading = () => {
+  return {
+    type: types.USERS_LOADING,
   };
 };
 
