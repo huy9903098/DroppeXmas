@@ -1,8 +1,7 @@
-import { ProductInterface } from '@utils/types';
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import styles from './ProductCard.module.scss';
-import { Discard, Minus, Plus } from '@utils/icons/index';
+import { Discard } from '@utils/icons/index';
 
 interface ProductCardProps {
   product: any;
