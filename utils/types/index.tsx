@@ -31,6 +31,7 @@ export interface CartInterface {
 export interface PreProduct {
   productId: number;
   quantity: number;
+  discard: false;
 }
 
 export interface ProductObjectByUser {
@@ -45,5 +46,5 @@ export interface ProductInterface {
   category: string;
   image: string;
   quantity: number;
-  discard?: boolean;
+  discard: boolean;
 }

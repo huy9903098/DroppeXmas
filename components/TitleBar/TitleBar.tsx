@@ -3,9 +3,7 @@ import { SpecialOffer } from '@components/SpecialOffer/SpecialOffer';
 import React, { useState } from 'react';
 import styles from './TitleBar.module.scss';
 
-interface TitleBarProps {}
-
-export const TitleBar: React.FC<TitleBarProps> = ({}) => {
+export const TitleBar: React.FC<{}> = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className={styles.title}>

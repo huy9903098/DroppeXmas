@@ -1,8 +1,7 @@
-import { ProductInterface } from '@utils/types';
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import styles from './ProductCard.module.scss';
-import { Discard, Minus, Plus } from '@utils/icons/index';
+import { Discard } from '@utils/icons/index';
 
 interface ProductCardProps {
   product: any;
@@ -20,10 +19,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    if (product.quantity === 0) {
-      setDiscard(product.discard);
-    }
-  }, []);
+    setDiscard(product.discard);
+  }, [product.discard]);
+
   const discountRatio =
     productIdIdentical[product.id] > 1
       ? productIdIdentical[product.id] / 10
@@ -39,7 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           discard ? styles.disabled : null
         }`}
       >
-        <img src={product.image} />
+        <img data-testid="product-img" src={product.image} />
       </div>
       <div
         className={`${styles.product__info} ${
@@ -48,7 +46,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       >
         <div>
           <h2>{product.title}</h2>
-          <p className={styles.price}>${product.price}</p>
+          <p data-testid="product-price" className={styles.price}>
+            ${product.price}
+          </p>
           <a href="#">{product.category}</a>
         </div>
       </div>

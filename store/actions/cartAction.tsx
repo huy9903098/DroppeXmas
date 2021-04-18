@@ -6,7 +6,7 @@ import { fetchUsers } from './userAction';
 export const fetchCarts = () => (dispatch) => {
   dispatch(setCartLoading());
   // can fetch 5 different carts from 5 different users from carts API because they container UserId
-  // while users API don't have cartId
+  // while users API beacuse they don't provide cartId
   axios
     .get('https://fakestoreapi.com/carts', {
       headers: {
@@ -23,6 +23,9 @@ export const fetchCarts = () => (dispatch) => {
       for (let a = 0; a < res.data.length; a++) {
         if (!five_carts[res.data[a].userId]) {
           five_carts[res.data[a].userId] = res.data[a];
+          for (let h = 0; h < res.data[a].products.length; h++) {
+            res.data[a].products[h].discard = false;
+          }
 
           five_users.push(res.data[a].userId);
           res.data[a].products.map((product) => {

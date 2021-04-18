@@ -8,9 +8,7 @@ import { updateProductsIdentical } from '@store/actions/productAction';
 import { Modal } from '@components/Modal/Modal';
 import { Cart } from '@components/Cart/Cart';
 
-interface WishListsProps {}
-
-export const WishLists: React.FC<WishListsProps> = ({}) => {
+export const WishLists: React.FC<{}> = ({}) => {
   const dispatch = useDispatch();
   const { users, loading } = useSelector((state: RootStateOrAny) => state.user);
   const { productsByUserId } = useSelector(

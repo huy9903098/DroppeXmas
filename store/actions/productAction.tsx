@@ -1,5 +1,5 @@
 import * as types from '@store/types';
-import { CartsInterface, PreProduct, ProductInterface } from '@utils/types';
+import { CartsInterface, PreProduct } from '@utils/types';
 import axios from 'axios';
 import { updateCart } from './cartAction';
 
@@ -17,7 +17,8 @@ export const fetchProducts = (products: PreProduct[], userId: number) => (
       })
       .then((resp) => {
         resp.data.quantity = product.quantity;
-        // inclue quanityt for total price display
+        resp.data.discard = product.discard;
+        // include quanity for total price display on the item
         return resp.data;
       })
       .catch((err) =>
@@ -37,16 +38,14 @@ export const fetchProducts = (products: PreProduct[], userId: number) => (
   });
 };
 
-export const fetchProductsByCartId = (products) => (dispatch) => {
+export const fetchProductsCart = (products) => (dispatch) => {
   dispatch(setCartProductsLoading());
-
-  for (let a = 0; a < products.length; a++) {
-    products[a].discard = false;
-  }
+  const copyProducts = JSON.parse(JSON.stringify(products));
+  // make a copy of the products to prevent reference which change the original
 
   dispatch({
     type: types.GET_SINGLE_CART_PRODUCT,
-    payload: products,
+    payload: copyProducts,
   });
 };
 
@@ -79,7 +78,7 @@ export const updateProductsByCartId = (
       // can't use res.data from API because there are 2 carts with id=6 so it will provide with wrong information
       callback(true);
       dispatch(updateCart(products, userId));
-      // This function will update the cart directly into the local state when successfully update cart
+      // This function will update the cart directly into the local state when cart is update successfully into the database
     })
     .catch((err) => {
       callback(false);
@@ -101,11 +100,11 @@ export const updateProductsIdentical = (carts: CartsInterface) => (
   for (let a = 0; a < productArr.length; a++) {
     productArr[a].products.map((product) => {
       if (!productDiscounts[product.productId]) {
-        if (product.quantity !== 0) {
+        if (product.quantity !== 0 && !product.discard) {
           productDiscounts[product.productId] = 1;
         }
       } else {
-        if (product.quantity !== 0) {
+        if (product.quantity !== 0 && !product.discard) {
           productDiscounts[product.productId]++;
         }
       }

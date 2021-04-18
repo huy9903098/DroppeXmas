@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import styles from './Cart.module.scss';
 import {
-  fetchProductsByCartId,
+  fetchProductsCart,
   updateProductsByCartId,
 } from '@store/actions/productAction';
 import { SuccessModal } from '@components/Modal/Success/SuccessModal';
@@ -19,8 +19,6 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
     (state: RootStateOrAny) => state.product
   );
 
-  const { carts } = useSelector((state: RootStateOrAny) => state.cart);
-
   const { users } = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -30,7 +28,7 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
   const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProductsByCartId(productsByUserId[userId]));
+    dispatch(fetchProductsCart(productsByUserId[userId]));
   }, []);
 
   useEffect(() => {
@@ -65,7 +63,8 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
     for (let a = 0; a < editProducts.length; a++) {
       finalCart.push({
         productId: editProducts[a].id,
-        quantity: editProducts[a].discard ? 0 : editProducts[a].quantity,
+        quantity: editProducts[a].quantity,
+        discard: editProducts[a].discard,
       });
     }
     dispatch(
