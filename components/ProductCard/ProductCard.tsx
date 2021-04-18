@@ -20,7 +20,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    setDiscard(product.discard);
+    if (product.quantity === 0) {
+      setDiscard(product.discard);
+    }
   }, []);
   const discountRatio =
     productIdIdentical[product.id] > 1
@@ -113,6 +115,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 2
               )}
             </p>
+            <input
+              className={`${styles.discount} ${styles.btnInputSquare}`}
+              type="button"
+              value={`${discountRatio * 100} %`}
+            />
           </>
         ) : (
           <p>${(product.price * product.quantity).toFixed(2)}</p>
@@ -123,7 +130,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           showMore ? styles.product__desc__show : styles.product__desc__hide
         }
       >
-        {product.description}
+        <b>Description:</b> {product.description}
       </div>
       <div
         className={styles.product__showmore}

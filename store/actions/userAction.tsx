@@ -11,6 +11,7 @@ export const fetchUsers = (users: number[]) => (dispatch) => {
         .get(`https://fakestoreapi.com/users/${users[a]}`, {
           headers: {
             'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then((res) => res.data)

@@ -1,19 +1,23 @@
 import * as types from '@store/types';
-import { CartsInterface, ProductDiscounts } from '@utils/types';
+import { CartsInterface, PreProduct, ProductDiscounts } from '@utils/types';
 import axios from 'axios';
 import { fetchUsers } from './userAction';
 
 export const fetchCarts = () => (dispatch) => {
   dispatch(setCartLoading());
+  // can fetch 5 different carts from 5 different users from carts API because they container UserId
+  // while users API don't have cartId
   axios
     .get('https://fakestoreapi.com/carts', {
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'multipart/form-data',
       },
     })
     .then((res) => {
       let five_carts: CartsInterface = {};
       // make 5 carts an object with userID as key ==> to access data with O(1)
+
       let five_users: number[] = [];
       let productDiscounts: ProductDiscounts = {};
       for (let a = 0; a < res.data.length; a++) {
@@ -46,12 +50,17 @@ export const fetchCarts = () => (dispatch) => {
     );
 };
 
-export const updateCart = (products, userId) => (dispatch) => {
+export const updateCart = (products: PreProduct[], userId: number) => (
+  dispatch
+) => {
   dispatch(setCartLoading());
   dispatch({
     type: types.UPDATE_CART,
     payload: products,
     key: userId,
+  });
+  dispatch({
+    type: types.PRODUCTS_CART_UPDATE_CLEAR,
   });
 };
 

@@ -12,6 +12,26 @@
     text-align: center;
   }
 
+  .success {
+    text-align: center;
+    color: $color-dark-green;
+    &__summary {
+      color: $color-black-font;
+      margin: 1rem 0rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+
+      .floatLeft {
+        text-align: left;
+      }
+
+      .floatRight {
+        justify-self: right;
+        align-self: end;
+      }
+    }
+  }
+
   .cartSummary {
     width: 100%;
     padding: 1.25rem;
@@ -28,6 +48,9 @@
 
   .save {
     text-align: center;
+    .pending {
+      opacity: 0.5;
+    }
     &__button {
       font-weight: bold;
       background: $color-green-theme;

@@ -33,6 +33,10 @@ export interface PreProduct {
   quantity: number;
 }
 
+export interface ProductObjectByUser {
+  [key: number]: ProductInterface;
+}
+
 export interface ProductInterface {
   id: number;
   title: string;

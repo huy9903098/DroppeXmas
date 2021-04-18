@@ -1,4 +1,5 @@
 @import '@styles/Themes/_variables.scss';
+@import '@styles/Themes/_mixins.scss';
 
 #header {
   position: fixed;
@@ -9,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 0.625rem;
-  box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+  box-shadow: $box-shadow;
   background-color: $color-white;
 
   a {
@@ -26,11 +27,21 @@
       margin-right: 0.625rem;
       height: 40px;
     }
+
+    span {
+      @include big-mobile {
+        display: none;
+      }
+
+      @include small-mobile {
+        display: none;
+      }
+    }
   }
 
   .logo {
     color: $color-green-theme;
-    font-size: 22px;
+    font-size: 32px;
     display: flex;
     align-items: center;
     font-weight: bold;
