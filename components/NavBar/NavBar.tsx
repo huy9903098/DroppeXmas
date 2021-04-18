@@ -1,11 +1,8 @@
 import React from 'react';
 import styles from './NavBar.module.scss';
-import Link from 'next/link';
 import { GiftBox } from '@utils/icons/index';
 
-interface NavBarProps {}
-
-export const NavBar: React.FC<NavBarProps> = ({}) => {
+export const NavBar: React.FC<{}> = ({}) => {
   return (
     <header id={styles.header}>
       <a className={styles.logo} href="/">

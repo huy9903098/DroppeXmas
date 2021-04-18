@@ -11,6 +11,7 @@ export const fetchCarts = () => (dispatch) => {
     .get('https://fakestoreapi.com/carts', {
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'multipart/form-data',
       },
     })
     .then((res) => {

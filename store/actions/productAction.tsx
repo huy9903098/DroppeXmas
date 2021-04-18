@@ -12,6 +12,7 @@ export const fetchProducts = (products: PreProduct[], userId: number) => (
       .get(`https://fakestoreapi.com/products/${product.productId}`, {
         headers: {
           'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((resp) => {
@@ -68,6 +69,7 @@ export const updateProductsByCartId = (
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'multipart/form-data',
         },
       }
     )

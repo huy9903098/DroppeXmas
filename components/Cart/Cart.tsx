@@ -113,14 +113,18 @@ export const Cart: React.FC<CartProps> = ({ userId, cartId }) => {
                       <div className={styles.floatLeft}>
                         {product.title}x{product.quantity}
                       </div>
-                      <div className={styles.floatRight}>${price}</div>
+                      <div className={styles.floatRight}>
+                        ${price.toFixed(2)}
+                      </div>
                     </div>
                   );
                 })}
 
               <div className={styles.success__summary}>
                 <div className={styles.floatLeft}>Total</div>
-                <div className={styles.floatRight}>${totalCartPrice}</div>
+                <div className={styles.floatRight}>
+                  ${totalCartPrice.toFixed(2)}
+                </div>
               </div>
             </div>
           </SuccessModal>
