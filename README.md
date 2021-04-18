@@ -14,4 +14,12 @@ Second, run the build:
 yarn start
 ```
 
+Third, run the test:
+
+```bash
+yarn test
+```
+
+Note: There is only one test, i didn't focus a lot on the test
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
