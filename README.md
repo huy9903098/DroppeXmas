@@ -21,5 +21,6 @@ yarn test
 ```
 
 Note: There is only one test, i didn't focus a lot on the test
+Note: Sometimes there is CORS errors, since i can't control the API i can't do anything about it
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
