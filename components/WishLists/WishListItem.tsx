@@ -54,7 +54,7 @@ export const WishListItem: React.FC<WishListItemProps> = ({
           }}
         >
           <h3 className={`${styles.cart__info} ${styles.h3resp}`}>
-            {user.name.firstname}
+            {user.name.firstname} {user.name.lastname}
           </h3>
 
           <div className={`${styles.flexCenter} ${styles.h4resp}`}>
