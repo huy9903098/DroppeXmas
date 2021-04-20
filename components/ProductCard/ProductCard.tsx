@@ -22,9 +22,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     setDiscard(product.discard);
   }, [product.discard]);
 
-  const [discountRatio, setdiscountRatio] = useState(
-    productIdIdentical[product.id] > 1 ? productIdIdentical[product.id] / 10 : 0
-  );
+  const discountRatio =
+    productIdIdentical[product.id] > 1
+      ? productIdIdentical[product.id] / 10
+      : 0;
   const toggleDiscard = () => {
     setDiscard(!discard);
     editProduct(product.id, product.quantity, !discard);
@@ -66,14 +67,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <input
           onClick={() => {
             const newQty = product.quantity + 1;
-            if (!discard) {
-              setdiscountRatio(
-                newQty === 0
-                  ? (productIdIdentical[product.id] - 1) / 10
-                  : productIdIdentical[product.id] / 10
-              );
-            }
-
             editProduct(product.id, newQty, discard);
           }}
           className={`${styles.button} ${styles.btnInputSquare}`}
@@ -88,14 +81,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           min={0}
           value={product.quantity}
           onChange={(e) => {
-            if (!discard) {
-              setdiscountRatio(
-                parseInt(e.target.value) === 0
-                  ? (productIdIdentical[product.id] - 1) / 10
-                  : productIdIdentical[product.id] / 10
-              );
-            }
-
             editProduct(
               product.id,
               e.target.value ? parseInt(e.target.value) : 0,
@@ -106,13 +91,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <input
           onClick={() => {
             const newQty = product.quantity !== 0 ? product.quantity - 1 : 0;
-            if (!discard) {
-              setdiscountRatio(
-                newQty === 0
-                  ? (productIdIdentical[product.id] - 1) / 10
-                  : productIdIdentical[product.id] / 10
-              );
-            }
             editProduct(product.id, newQty, discard);
           }}
           className={`${styles.button} ${styles.btnInputSquare}`}
