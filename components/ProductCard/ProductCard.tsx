@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import styles from './ProductCard.module.scss';
 import { Discard } from '@utils/icons/index';
+import { ProductInterface } from '@utils/types';
 
 interface ProductCardProps {
-  product: any;
+  product: ProductInterface;
   editProduct(id: number, quantity: number, discard: boolean): any;
 }
 
